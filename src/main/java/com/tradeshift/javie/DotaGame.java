@@ -2,6 +2,7 @@ package com.tradeshift.javie;
 
 import org.springframework.stereotype.Repository;
 
+
 /**
  * Created by Javie on 15/7/22.
  */

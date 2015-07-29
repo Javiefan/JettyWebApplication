@@ -1,7 +1,8 @@
 package com.tradeshift.javie;
 
 
-import org.json.JSONObject;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -19,6 +20,7 @@ public class Hello {
     ApplicationContext applicationContext = new AnnotationConfigApplicationContext("com.tradeshift.javie");
     Player player = applicationContext.getBean(Player.class);
 
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String runGet() {
@@ -35,12 +37,16 @@ public class Hello {
     }
 
     @POST
-    @Path("test/data/{data}")
+    @Path("test/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String run(@PathParam("data") String data) {
+    public JSONObject run(@PathParam("id") int id) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data", data);
-        return jsonObject.toString();
+        try {
+            jsonObject.put("id",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     @POST
